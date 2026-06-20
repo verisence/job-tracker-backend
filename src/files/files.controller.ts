@@ -16,6 +16,7 @@ const MAX_FILE_SIZE = 10 * 1024 * 1024;
 const uploadOptions = { storage: memoryStorage(), limits: { fileSize: MAX_FILE_SIZE } };
 const fileValidators = () =>
   new ParseFilePipe({
+    // TODO: Add a custom validator to check the file type based on the file extension instead of the MIME type. This is because some browsers may send incorrect MIME types for certain files, which could lead to security issues. Use a library like `file-type` to determine the file type based on the file's content instead of relying on the MIME type sent by the browser. This will help ensure that only allowed file types are uploaded, regardless of the MIME type provided by the client.
     validators: [
       new MaxFileSizeValidator({ maxSize: MAX_FILE_SIZE }),
       new FileTypeValidator({ fileType: ALLOWED_FILE_TYPES }),
@@ -25,7 +26,7 @@ const fileValidators = () =>
 @UseGuards(FirebaseAuthGuard)
 @Controller()
 export class FilesController {
-  constructor(private readonly filesService: FilesService) {}
+  constructor(private readonly filesService: FilesService) { }
 
   @Post('files')
   @UseInterceptors(FileInterceptor('file', uploadOptions))
