@@ -5,6 +5,7 @@ import { UsersModule } from './users/users.module';
 import { ApplicationsModule } from './applications/applications.module';
 import { FilesModule } from './files/files.module';
 import { AuditModule } from './audit/audit.module';
+import { DashboardModule } from './dashboard/dashboard.module';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 
@@ -16,6 +17,7 @@ import { AppService } from './app.service';
     ApplicationsModule,
     FilesModule,
     AuditModule,
+    DashboardModule,
   ],
   controllers: [AppController],
   providers: [AppService],
