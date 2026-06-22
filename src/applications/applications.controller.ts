@@ -10,7 +10,7 @@ import { UpdateStatusDto } from './dto/update-status.dto';
 @UseGuards(FirebaseAuthGuard)
 @Controller('applications')
 export class ApplicationsController {
-  constructor(private readonly applicationsService: ApplicationsService) {}
+  constructor(private readonly applicationsService: ApplicationsService) { }
 
   @Post()
   create(@CurrentUser() user: DecodedIdToken, @Body() dto: CreateApplicationDto) {
@@ -22,8 +22,9 @@ export class ApplicationsController {
     @CurrentUser() user: DecodedIdToken,
     @Query('status') status?: string,
     @Query('companyName') companyName?: string,
+    @Query('tags') tags?: string,
   ) {
-    return this.applicationsService.findAll(user.uid, { status, companyName });
+    return this.applicationsService.findAll(user.uid, { status, companyName, tags });
   }
 
   @Get(':id')

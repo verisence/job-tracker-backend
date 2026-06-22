@@ -55,11 +55,12 @@ export class ApplicationsService {
     return { id: ref.id, ...doc };
   }
 
-  async findAll(uid: string, filters: { status?: string; companyName?: string }) {
+  async findAll(uid: string, filters: { status?: string; companyName?: string; tags?: string }) {
     let query: Query<DocumentData> = this.collection().where('uid', '==', uid);
 
     if (filters.status) query = query.where('status', '==', filters.status);
     if (filters.companyName) query = query.where('companyName', '==', filters.companyName);
+    if (filters.tags) query = query.where('tags', 'array-contains', filters.tags);
 
     const snap = await query.orderBy('createdAt', 'desc').get();
     return snap.docs.map((d) => ({ id: d.id, ...(d.data() as ApplicationRecord) }));
