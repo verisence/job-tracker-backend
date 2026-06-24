@@ -58,3 +58,5 @@ firebase-service-account.json
 .env
 
 test.txt
+deployment-steps.txt
+env.prod.yaml

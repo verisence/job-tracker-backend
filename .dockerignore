@@ -1,0 +1,7 @@
+node_modules
+dist
+.env
+.env.example
+firebase-service-account.json
+.git
+deployment-steps.txt
